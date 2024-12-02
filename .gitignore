@@ -1,0 +1,4 @@
+*.o
+.vscode
+/advent2024
+/inputs
