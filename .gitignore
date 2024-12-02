@@ -1,1 +1,3 @@
 *.o
+.vscode
+/advent2024
