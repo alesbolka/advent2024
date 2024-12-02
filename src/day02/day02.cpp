@@ -24,9 +24,10 @@ bool isReportSafe(vector<int> levels, bool semiSafe = false)
       {
         /**
          * If the first report is "wrong", the level might get flagged as incorrect on the third report. So start by
-         * n-2 to avoid errors
+         * n-2 to avoid errors (it affects the initial "direction" of increasing / decreasing numbers that might get set
+         * incorrectly)
          */
-        for (int jj = ii - 2; jj <= ii; jj++) {
+        for (int jj = (ii < 3 ? ii - 2 : ii - 1); jj <= ii; jj++) {
           if (jj < 0) {
             continue;
           }
