@@ -26,7 +26,7 @@ std::vector<int> parseIntsFromLine(const std::string& str)
 {
   std::vector<int> result = {};
 
-  std::regex number_regex("(\\d+)");
+  std::regex number_regex("(\\-?\\d+)");
   auto it_start = std::sregex_iterator(str.begin(), str.end(), number_regex);
   auto it_end = std::sregex_iterator();
 
