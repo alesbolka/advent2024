@@ -2,10 +2,11 @@
 #include "helpers/helpers.h"
 #include "./day01/day01.h"
 #include "./day02/day02.h"
+#include "./day03/day03.h"
 
 int main(int argc, char** argv)
 {
-  int day = 2;
+  int day = 3;
   int task = 2;
   int64_t result = day01::executor(task);
 
@@ -17,8 +18,11 @@ int main(int argc, char** argv)
   case 2:
     result = day02::executor(task);
     break;
+  case 3:
+    result = day03::executor(task);
+    break;
   default:
-    std::cout << "Invalid day request" << std::endl;
+    std::cout << "Invalid day requested" << std::endl;
     return 1;
   }
 
