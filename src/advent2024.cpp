@@ -4,16 +4,17 @@
 #include "./day01/day01.h"
 #include "./day02/day02.h"
 #include "./day03/day03.h"
+#include "./day06/day06.h"
 
 int main(int argc, char** argv)
 {
-  int day = 3;
-  int task = 2;
+  int day = 6;
+  int task = 1;
   int64_t result = -1;
 
   char path[64];
 
-  std::string name = "sample";
+  std::string name = "input";
 
   sprintf(path, "./inputs/day%02d/%s.txt", day, name.c_str());
 
@@ -35,6 +36,9 @@ int main(int argc, char** argv)
     break;
   case 5:
     std::cout << "lost code during botched rebase, might re-implement later" << std::endl;
+    break;
+  case 6:
+    result = day06::executor(task, data);
     break;
   default:
     std::cout << "Invalid day requested" << std::endl;
