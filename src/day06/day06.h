@@ -73,7 +73,7 @@ protected:
   bool isOutOfBounds(Point node);
   void print(std::unordered_map<int64_t, bool> visited, Point direction, Point current, Point* tmpBlocker =
   nullptr);
-  bool shouldCheckBlocker(Point node);
+  bool shouldCheckBlocker(std::unordered_map<int64_t, bool>* checked, Point node, Point direction);
 };
 
 inline int64_t task1(std::vector<std::string> input)
