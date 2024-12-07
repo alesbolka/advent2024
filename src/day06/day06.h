@@ -1,9 +1,12 @@
 #ifndef DAY_06
 #define DAY_06
 
-#include <vector>
+#include <algorithm>
+#include <iostream>
 #include <string>
+#include <stdexcept>
 #include <unordered_map>
+#include <vector>
 
 namespace day06 {
 
@@ -40,22 +43,54 @@ struct Point
     this->x -= other.x;
     return *this;
   }
+
+  bool operator==(const Point& right)
+  {
+    return y == right.y && x == right.x;
+  }
+
+  bool operator <(const Point& other) const
+  {
+    if (y == other.y) {
+      return x < other.x;
+    }
+
+    return y < other.y;
+  }
+
+  Point rotate();
 };
-
-inline std::ostream& operator << (std::ostream& outs, const Point& pt) {
-  return outs << "(" << pt.y << "," << pt.x << ")";
-}
-
-inline bool operator==(const Point& left, const Point& right)
-{
-  return left.y == right.y && left.x == right.x;
-}
-
 
 const struct Point LEFT { 0, -1 };
 const struct Point RIGHT { 0, 1 };
 const struct Point UP { -1, 0 };
 const struct Point DOWN { 1, 0 };
+
+inline Point Point::rotate()
+{
+  if (*this == LEFT)
+  {
+    return UP;
+  }
+  else if (*this == UP)
+  {
+    return RIGHT;
+  }
+  else if (*this == RIGHT)
+  {
+    return DOWN;
+  }
+  else if (*this == DOWN)
+  {
+    return LEFT;
+  }
+
+  throw std::invalid_argument("Invalid Point passed to the rotate function " + std::to_string(y) + "," + std::to_string(x));
+}
+
+inline std::ostream& operator << (std::ostream& outs, const Point& pt) {
+  return outs << "(" << pt.y << "," << pt.x << ")";
+}
 
 class Map
 {
@@ -90,6 +125,8 @@ inline int64_t task2(std::vector<std::string> input)
   return blockers.size();
 };
 
+
+int64_t task2_v2(std::vector<std::string> lines);
 inline int64_t executor(int task, std::vector<std::string> input)
 {
 
@@ -98,7 +135,7 @@ inline int64_t executor(int task, std::vector<std::string> input)
   }
 
   if (task == 2) {
-    return task2(input);
+    return task2_v2(input);
   }
 
   return -1;
