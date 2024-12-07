@@ -9,7 +9,7 @@
 int main(int argc, char** argv)
 {
   int day = 6;
-  int task = 1;
+  int task = 2;
   int64_t result = -1;
 
   char path[64];

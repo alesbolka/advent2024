@@ -1,4 +1,6 @@
+#include <algorithm>
 #include <stdexcept>
+#include <unordered_map>
 #include <iostream>
 #include "./day06.h"
 
@@ -82,79 +84,139 @@ Map::Map(vector<std::string> lines)
   }
 };
 
-vector<Point> Map::findVisitedLocations()
+inline bool Map::shouldCheckBlocker(
+  Point node
+)
+{
+  return !this->isOutOfBounds(node) && !this->isWall(node);
+}
+
+vector<Point> Map::findVisitedLocations(vector<Point>* blockers)
 {
   vector<Point> res{};
-  unordered_map<int, bool> visited{};
+  unordered_map<int64_t, bool> visited{};
   Point current(this->start);
   int size = this->walls[current.y].size();
   auto direction = this->direction;
   // std::cout << "start: " << current << std::endl;
+  unordered_map<int64_t, bool> checkedBlockers{};
 
-  while (
-    current.y >= 0 && current.y < this->walls.size() &&
-    current.x >= 0 && current.x < this->walls[current.y].size()
-    )
+  int jj = 0;
+  while (!this->isOutOfBounds(current))
   {
-    if (this->walls[current.y][current.x])
+    if (this->isWall(current))
     {
-      current.y -= direction.y;
-      current.x -= direction.x;
+      current -= direction;
       direction = rotate(direction);
-      // this->print(visited, direction, Point{ current.y, current.x });
     }
     else {
-      int id = current.y * size + current.x;
-      if (!visited.contains(id)) {
-        visited[id] = true;
-        res.push_back({ current.y, current.x });
+      // this->print(visited, direction, current);
+      int nodeId = this->nodeId(current);
+      if (blockers == nullptr && !visited.contains(nodeId)) {
+        visited[nodeId] = true;
+        res.push_back(current);
+      }
+
+      if (
+        blockers != nullptr &&
+        this->shouldCheckBlocker(current + direction)
+      )
+      {
+        bool isRecursive = this->checkForRecursion(current, direction);
+        if (isRecursive)
+        {
+          blockers->push_back(current + direction);
+        }
       }
     }
 
-    current.y += direction.y;
-    current.x += direction.x;
+    current += direction;
   }
+
+  // if (blockers != nullptr)
+  // {
+  //   for (Point blocker : *blockers)
+  //   {
+  //     this->print(visited, Point{ -1,-1 }, Point{ -1,-1 }, &blocker);
+  //   }
+  // }
 
   return res;
 }
 
-void Map::print(unordered_map<int, bool> visited, Point direction, Point current)
+inline bool Map::isWall(Point node)
 {
-  int size = this->walls[0].size();
-  for (int yy = 0; yy < this->walls.size(); yy++)
+  return !this->isOutOfBounds(node) && this->walls[node.y][node.x];
+}
+
+inline bool Map::isOutOfBounds(Point node)
+{
+  return node.y < 0 ||
+    node.y >= this->walls.size() ||
+    node.x < 0 ||
+    node.x >= this->walls[node.y].size();
+}
+
+bool Map::checkForRecursion(Point start, Point direction)
+{
+  unordered_map<int64_t, bool> visited{};
+  vector<int64_t> travelled{};
+  Point current(start);
+  Point fakeWall(start + direction);
+
+  // this->print(visited, direction, current, &fakeWall);
+  // std::cout << "checking recursion " << start << direction << std::endl;
+  int ii = 0;
+
+  while (!this->isOutOfBounds(current))
   {
-    for (int xx = 0; xx < this->walls[yy].size(); xx++)
+    if (this->isWall(current) || current == fakeWall)
     {
-      int id = yy * size + xx;
-      if (current.y == yy && current.x == xx)
-      {
-        if (direction == LEFT) {
-          std::cout << '<';
-        }
-        else if (direction == RIGHT) {
-          std::cout << '>';
-        }
-        else if (direction == UP) {
-          std::cout << '^';
-        }
-        else {
-          std::cout << 'v';
-        }
-      }
-      else if (this->walls[yy][xx])
-      {
-        std::cout << '#';
-      }
-      else if (visited.contains(id))
-      {
-        std::cout << 'X';
-      }
-      else {
-        std::cout << '.';
-      }
+      current -= direction;
+      direction = rotate(direction);
+      current += direction;
     }
-    std::cout << std::endl;
+
+    auto nodeId = this->nodeId(current, &direction);
+    // this->print(visited, direction, current, &fakeWall);
+    // std::cout << std::endl;
+
+    if (std::find(travelled.begin(), travelled.end(), nodeId) != travelled.end())
+    {
+      return true;
+    }
+
+    travelled.push_back(nodeId);
+
+
+    current += direction;
   }
+  return false;
+}
+
+
+inline int64_t Map::nodeId(Point node, Point* direction)
+{
+  int64_t  res = 10 * (node.y * this->walls[0].size() + node.x);
+  if (direction != nullptr) {
+    if (*direction == LEFT)
+    {
+      res += 0;
+    }
+    else if (*direction == RIGHT)
+    {
+      res += 1;
+    }
+    else if (*direction == DOWN)
+    {
+      res += 2;
+    }
+    else if (*direction == RIGHT)
+    {
+      res += 3;
+    }
+  }
+  return  res;
 }
 
 }
