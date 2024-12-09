@@ -10,26 +10,31 @@ namespace day09
 class Disk {
 public:
   Disk(std::string input);
+  void fragment();
   void defragment();
   int64_t checkSum();
 protected:
   std::vector<uint16_t> data;
 
   int findNextEmpty(int offset);
+  int findEmptyBlock(int offset, int size);
   void print();
 };
 
 inline int64_t task1(std::vector<std::string> lines)
 {
   Disk disk(lines[0]);
+  disk.fragment();
 
-  disk.defragment();
   return disk.checkSum();
 }
 
 inline int64_t task2(std::vector<std::string> lines)
 {
-  return -1;
+  Disk disk(lines[0]);
+  disk.defragment();
+
+  return disk.checkSum();
 }
 
 inline int64_t executor(int task, std::vector<std::string> input)

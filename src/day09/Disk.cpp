@@ -43,7 +43,7 @@ int Disk::findNextEmpty(int offset)
   return -1;
 }
 
-void Disk::defragment()
+void Disk::fragment()
 {
   int lastKnownEmpty = 0;
 
@@ -77,12 +77,85 @@ int64_t Disk::checkSum()
 {
   int64_t res = 0;
 
-  for (int ii = 0; data[ii] != 0; ii++)
+  for (int ii = 0; ii < data.size(); ii++)
   {
+    if (data[ii] == 0)
+    {
+      continue;
+    }
     res += ii * (data[ii] - 1);
   }
 
   return res;
+}
+
+// part 2
+
+int Disk::findEmptyBlock(int offset, int desiredLength)
+{
+  // std::cout << "searching for: " << desiredLength << " from " << offset << std::endl;
+  int emptyLength = 0;
+  for (int ii = offset; ii < data.size(); ii++)
+  {
+    if (data[ii] == 0)
+    {
+      emptyLength++;
+      if (emptyLength == desiredLength) {
+        return ii - emptyLength + 1;
+      }
+    }
+    else if (emptyLength != 0)
+    {
+      emptyLength = 0;
+    }
+  }
+
+  return -1;
+}
+
+void Disk::defragment()
+{
+
+  int firstEmpty = findEmptyBlock(0, 1);
+  uint16_t currentFile = 0;
+  int fileLength = 0;
+
+  for (int ii = (data.size() - 1); ii > firstEmpty; ii--) {
+    if (data[ii] == 0) {
+      continue;
+    }
+
+    currentFile = data[ii];
+    fileLength = 0;
+
+    while (ii > firstEmpty && data[ii] == currentFile)
+    {
+      fileLength++;
+      ii--;
+    }
+
+    int emptySegment = findEmptyBlock(firstEmpty, fileLength);
+    if (emptySegment < 0 || emptySegment >= ii)
+    {
+      // fix the index, since the loop with decrease by 1 as well
+      ii++;
+      continue;
+    }
+
+    if (emptySegment == firstEmpty)
+    {
+      firstEmpty += emptySegment;
+    }
+
+    for (int jj = 0; jj < fileLength; jj++)
+    {
+      data[emptySegment + jj] = data[ii + jj + 1];
+      data[ii + jj + 1] = 0;
+    }
+
+    // fix the index, since the loop with decrease by 1 as well
+    ii++;
+  }
 }
 
 }
