@@ -7,11 +7,12 @@
 #include "./day06/day06.h"
 #include "./day07/day07.h"
 #include "./day08/day08.h"
+#include "./day09/day09.h"
 
 int main(int argc, char** argv)
 {
-  int day = 8;
-  int task = 2;
+  int day = 9;
+  int task = 1;
   int64_t result = -1;
 
   char path[64];
@@ -47,6 +48,9 @@ int main(int argc, char** argv)
     break;
   case 8:
     result = day08::executor(task, data);
+    break;
+  case 9:
+    result = day09::executor(task, data);
     break;
   default:
     std::cout << "Invalid day requested" << std::endl;
