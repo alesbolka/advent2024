@@ -27,6 +27,11 @@ std::vector<std::string> readFileLines(const std::string path)
     result.push_back(line);
   }
 
+  if (result[result.size() - 1] == "")
+  {
+    result.pop_back();
+  }
+
   return result;
 }
 

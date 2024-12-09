@@ -78,9 +78,5 @@ inline int64_t executor(int task, std::vector<std::string> input)
   return -1;
 };
 
-
-
-
-
 }
 #endif
