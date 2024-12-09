@@ -1,12 +1,17 @@
 APPNAME := advent2024
-CPP_COMPILER := g++
+BUILDER := g++
 COMPILER_FLAGS := -std=c++20 -fdiagnostics-color=always
 
 SRC_DIR := src
-OBJ_DIR := obj
+OBJ_DIR := build
 
-CPP_FILES := $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
-OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CPP_FILES))
+SOURCE_FILES := $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
+OBJECT_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SOURCE_FILES))
 
-full:
-	$(CPP_COMPILER) $(COMPILER_FLAGS) $(LDFLAGS) -o $(APPNAME) $(CPP_FILES)
+full: $(OBJECT_FILES)
+	$(BUILDER) $(OBJECT_FILES) -o $(APPNAME)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(info Compiling $<...)
+	@$(shell mkdir -p $(dir $@))
+	@$(BUILDER) $(COMPILER_FLAGS) -c $< -o $@
