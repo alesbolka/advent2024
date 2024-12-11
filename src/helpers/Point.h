@@ -81,6 +81,8 @@ inline std::ostream& operator << (std::ostream& outs, const Point& pt) {
   return outs << "(" << pt.y << "," << pt.x << ")";
 }
 
+namespace directions
+{
 const struct Point LEFT { 0, -1 };
 const struct Point RIGHT { 0, 1 };
 const struct Point UP { -1, 0 };
@@ -90,24 +92,25 @@ const struct Point UP_LEFT { -1, -1 };
 const struct Point UP_RIGHT { -1, 1 };
 const struct Point DOWN_LEFT { 1, -1 };
 const struct Point DOWN_RIGHT { 1, 1 };
+}
 
 inline Point Point::rotate()
 {
-  if (*this == LEFT)
+  if (*this == directions::LEFT)
   {
-    return UP;
+    return directions::UP;
   }
-  else if (*this == UP)
+  else if (*this == directions::UP)
   {
-    return RIGHT;
+    return directions::RIGHT;
   }
-  else if (*this == RIGHT)
+  else if (*this == directions::RIGHT)
   {
-    return DOWN;
+    return directions::DOWN;
   }
-  else if (*this == DOWN)
+  else if (*this == directions::DOWN)
   {
-    return LEFT;
+    return directions::LEFT;
   }
 
   throw std::invalid_argument("Invalid Point passed to the rotate function " + std::to_string(y) + "," + std::to_string(x));
