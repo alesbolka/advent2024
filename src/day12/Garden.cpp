@@ -28,6 +28,7 @@ Garden::Garden(vector<string> lines)
       }
     }
   }
+  std::cout << std::endl;
 };
 
 int64_t Garden::fencePrice()
@@ -38,6 +39,16 @@ int64_t Garden::fencePrice()
     res += region.fencePrice();
   }
 
+  return res;
+}
+
+int64_t Garden::discountedPrice()
+{
+  int64_t res = 0;
+  for (auto region : regions)
+  {
+    res += region.discountedPrice();
+  }
   return res;
 }
 
