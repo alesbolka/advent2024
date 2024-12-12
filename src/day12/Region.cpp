@@ -76,7 +76,9 @@ vector<Point> Region::runEdge(Point startPlot, Point edgeSide)
   Point edgeStart(startPlot);
   Point edgeEnd(startPlot);
 
+  // the edge always runs perpendicular to the direction we were checking in
   Point edgeDirection = edgeSide.rotate();
+  // check that neither side of the edge changes (to accout for potential weird corners)
   while (plots.contains(edgeEnd + edgeDirection) && !plots.contains(edgeEnd + edgeDirection + edgeSide))
   {
     edgeEnd += edgeDirection;
@@ -93,23 +95,30 @@ vector<Point> Region::runEdge(Point startPlot, Point edgeSide)
 int64_t Region::discountedPrice()
 {
   int64_t res = 0;
+  // first key is the direction the edge is in from a plot
+  // the second key is the node we're checking from
+  // value is boolean for whether this edge is accounted for
   map<Point, map<Point, bool>> alreadyChecked{};
 
   for (auto plot : plots)
   {
-    for (auto edgeSide : directions) {
+    for (auto edgeSide : directions) { // check if there's an edge in any of the directions from the current plot
       if (
         !plots.contains(plot.first + edgeSide) &&
+        // don't check the same edge twice
         !alreadyChecked[edgeSide][plot.first]
       )
       {
         auto edgePoints = runEdge(plot.first, edgeSide);
+        // the edge goes in this direction
         auto edgeDir = edgeSide.rotate();
         auto edgeNode = edgePoints[0];
+        // add the start and end of the edge to the list of checked things (the loop edge cases are wonky)
         alreadyChecked[edgeSide][edgeNode] = true;
         alreadyChecked[edgeSide][edgePoints[1]] = true;
         res++;
 
+        // add all edge pieces to the checked list
         while (edgeNode != edgePoints[1])
         {
           alreadyChecked[edgeSide][edgeNode] = true;
