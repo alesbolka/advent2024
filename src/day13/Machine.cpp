@@ -56,8 +56,6 @@ int Machine::bruteForce()
           continue;
         }
 
-
-
         if (
           (cx % (pressA * x0 + pressB * x1)) == 0 &&
           (cy % (pressA * y0 + pressB * y1)) == 0 &&
