@@ -24,9 +24,9 @@ Map::Map(vector<string> data)
 }
 
 
-int64_t Map::trailScore()
+uint64_t Map::trailScore()
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   vector<Point> directions{
     helpers::point::directions::LEFT,
     helpers::point::directions::UP,
@@ -88,9 +88,9 @@ int64_t Map::trailScore()
   return res;
 }
 
-int64_t Map::trailScoreV2()
+uint64_t Map::trailScoreV2()
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   vector<Point> directions{
     helpers::point::directions::LEFT,
     helpers::point::directions::UP,

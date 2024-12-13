@@ -47,9 +47,9 @@ bool isReportSafe(vector<int> levels, bool semiSafe = false)
   return true;
 }
 
-int64_t task1(vector<string> input)
+uint64_t task1(vector<string> input)
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   for (auto line : input) {
     bool isSafe = isReportSafe(helpers::parseIntsFromLine(line));
     if (isSafe) {
@@ -60,9 +60,9 @@ int64_t task1(vector<string> input)
   return res;
 }
 
-int64_t task2(vector<string> input)
+uint64_t task2(vector<string> input)
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   for (auto line : input) {
     bool isSafe = isReportSafe(helpers::parseIntsFromLine(line), true);
     if (isSafe) {

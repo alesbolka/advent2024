@@ -39,7 +39,7 @@ inline bool inGrid(Point pt, int sizeY, int sizeX)
     pt.x >= 0 && pt.x < sizeX;
 }
 
-int64_t Grid::findAntinodes()
+uint64_t Grid::findAntinodes()
 {
   map<Point, bool> antinodes{};
 
@@ -67,7 +67,7 @@ int64_t Grid::findAntinodes()
   return antinodes.size();
 }
 
-int64_t Grid::findHarmonicAntinodes()
+uint64_t Grid::findHarmonicAntinodes()
 {
   map<Point, bool> antinodes{};
 

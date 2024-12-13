@@ -21,15 +21,15 @@ public:
   Region(Point start, const std::vector<std::string>& grid);
 
   inline std::vector<Point> nodes() { return this->_nodes; };
-  int64_t fencePrice();
-  int64_t discountedPrice();
+  uint64_t fencePrice();
+  uint64_t discountedPrice();
 protected:
   char plant;
   std::vector<Point> _nodes;
   std::map<Point, char> plots;
 
   std::vector<Point> runEdge(Point start, Point edgeSide);
-  int64_t verticalEdgeLength(Point start);
+  uint64_t verticalEdgeLength(Point start);
 };
 
 class Garden
@@ -37,13 +37,13 @@ class Garden
 public:
   Garden(std::vector<std::string> lines);
 
-  int64_t fencePrice();
-  int64_t discountedPrice();
+  uint64_t fencePrice();
+  uint64_t discountedPrice();
 protected:
   std::vector<Region> regions;
 };
 
-inline int64_t executor(int task, std::vector<std::string> input)
+inline uint64_t executor(int task, std::vector<std::string> input)
 {
   Garden garden(input);
 

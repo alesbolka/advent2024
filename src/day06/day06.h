@@ -102,21 +102,21 @@ protected:
   Point start;
   Point direction;
 
-  int64_t nodeId(Point node, Point* direction = nullptr);
+  uint64_t nodeId(Point node, Point* direction = nullptr);
   bool checkForRecursion(Point start, Point Direction);
   bool isWall(Point node);
   bool isOutOfBounds(Point node);
-  void print(std::unordered_map<int64_t, bool> visited, Point direction, Point current, Point* tmpBlocker =
+  void print(std::unordered_map<uint64_t, bool> visited, Point direction, Point current, Point* tmpBlocker =
   nullptr);
-  bool shouldCheckBlocker(std::unordered_map<int64_t, bool>* checked, Point node, Point direction);
+  bool shouldCheckBlocker(std::unordered_map<uint64_t, bool>* checked, Point node, Point direction);
 };
 
-inline int64_t task1(std::vector<std::string> input)
+inline uint64_t task1(std::vector<std::string> input)
 {
   Map map(input);
   return map.findVisitedLocations().size();
 };
-inline int64_t task2(std::vector<std::string> input)
+inline uint64_t task2(std::vector<std::string> input)
 {
   std::vector<Point> blockers{};
   Map map(input);
@@ -126,8 +126,8 @@ inline int64_t task2(std::vector<std::string> input)
 };
 
 
-int64_t task2_v2(std::vector<std::string> lines);
-inline int64_t executor(int task, std::vector<std::string> input)
+uint64_t task2_v2(std::vector<std::string> lines);
+inline uint64_t executor(int task, std::vector<std::string> input)
 {
 
   if (task == 1) {

@@ -16,17 +16,17 @@ class Map
 {
 public:
   Map(std::vector<std::string> lines);
-  int64_t trailScore();
-  int64_t trailScoreV2();
+  uint64_t trailScore();
+  uint64_t trailScoreV2();
 protected:
   std::vector<std::string> grid;
   std::vector<Point> startNodes;
 };
 
-int64_t task1(std::vector<std::string> lines);
-int64_t task2(std::vector<std::string> lines);
+uint64_t task1(std::vector<std::string> lines);
+uint64_t task2(std::vector<std::string> lines);
 
-inline int64_t executor(int task, std::vector<std::string> input)
+inline uint64_t executor(int task, std::vector<std::string> input)
 {
 
   if (task == 1) {

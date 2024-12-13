@@ -6,7 +6,7 @@ namespace day06
 {
 
 
-void Map::print(std::unordered_map<int64_t, bool> visited, Point direction, Point current, Point* tmpBlocker)
+void Map::print(std::unordered_map<uint64_t, bool> visited, Point direction, Point current, Point* tmpBlocker)
 {
   int size = this->walls[0].size();
 

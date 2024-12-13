@@ -16,8 +16,8 @@
 int main(int argc, char** argv)
 {
   int day = 13;
-  int task = 1;
-  int64_t result = -1;
+  int task = 2;
+  uint64_t result = -1;
 
   char path[64];
 

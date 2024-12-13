@@ -110,9 +110,9 @@ bool isRecursive(Point start, Point startDir, map<Point, bool> walls, int sizeY,
 }
 
 
-int64_t task2_v2(vector<string> lines)
+uint64_t task2_v2(vector<string> lines)
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   Point current{ -1, -1 };
   Point direction = UP;
   map<Point, bool>walls{};

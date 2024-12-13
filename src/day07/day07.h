@@ -25,13 +25,13 @@ public:
   const uint64_t result() const { return _result; };
 
 protected:
-  int64_t _result;
+  uint64_t _result;
   std::vector<uint64_t> numbers;
 };
 
-inline int64_t task1(std::vector<std::string> lines)
+inline uint64_t task1(std::vector<std::string> lines)
 {
-  int64_t res = 0;
+  uint64_t res = 0;
 
   for (auto line : lines)
   {
@@ -46,9 +46,9 @@ inline int64_t task1(std::vector<std::string> lines)
   return res;
 }
 
-inline int64_t task2(std::vector<std::string> lines)
+inline uint64_t task2(std::vector<std::string> lines)
 {
-  int64_t res = 0;
+  uint64_t res = 0;
 
   for (auto line : lines)
   {
@@ -64,7 +64,7 @@ inline int64_t task2(std::vector<std::string> lines)
   return res;
 }
 
-inline int64_t executor(int task, std::vector<std::string> input)
+inline uint64_t executor(int task, std::vector<std::string> input)
 {
 
   if (task == 1) {

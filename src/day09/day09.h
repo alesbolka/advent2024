@@ -12,7 +12,7 @@ public:
   Disk(std::string input);
   void fragment();
   void defragment();
-  int64_t checkSum();
+  uint64_t checkSum();
 protected:
   std::vector<uint16_t> data;
 
@@ -21,7 +21,7 @@ protected:
   void print();
 };
 
-inline int64_t task1(std::vector<std::string> lines)
+inline uint64_t task1(std::vector<std::string> lines)
 {
   Disk disk(lines[0]);
   disk.fragment();
@@ -29,7 +29,7 @@ inline int64_t task1(std::vector<std::string> lines)
   return disk.checkSum();
 }
 
-inline int64_t task2(std::vector<std::string> lines)
+inline uint64_t task2(std::vector<std::string> lines)
 {
   Disk disk(lines[0]);
   disk.defragment();
@@ -37,7 +37,7 @@ inline int64_t task2(std::vector<std::string> lines)
   return disk.checkSum();
 }
 
-inline int64_t executor(int task, std::vector<std::string> input)
+inline uint64_t executor(int task, std::vector<std::string> input)
 {
 
   if (task == 1) {

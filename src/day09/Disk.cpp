@@ -73,9 +73,9 @@ void Disk::print()
   std::cout << std::endl;
 }
 
-int64_t Disk::checkSum()
+uint64_t Disk::checkSum()
 {
-  int64_t res = 0;
+  uint64_t res = 0;
 
   for (int ii = 0; ii < data.size(); ii++)
   {

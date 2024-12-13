@@ -85,7 +85,7 @@ Map::Map(vector<std::string> lines)
 };
 
 inline bool Map::shouldCheckBlocker(
-  unordered_map<int64_t, bool>* alreadyChecked,
+  unordered_map<uint64_t, bool>* alreadyChecked,
   Point node,
   Point direction
 )
@@ -106,12 +106,12 @@ inline bool Map::shouldCheckBlocker(
 vector<Point> Map::findVisitedLocations(vector<Point>* blockers)
 {
   vector<Point> res{};
-  unordered_map<int64_t, bool> visited{};
+  unordered_map<uint64_t, bool> visited{};
   Point current(this->start);
   int size = this->walls[current.y].size();
   auto direction = this->direction;
   // std::cout << "start: " << current << std::endl;
-  unordered_map<int64_t, bool> checkedBlockers{};
+  unordered_map<uint64_t, bool> checkedBlockers{};
 
   while (!this->isOutOfBounds(current))
   {
@@ -162,8 +162,8 @@ inline bool Map::isOutOfBounds(Point node)
 
 bool Map::checkForRecursion(Point start, Point direction)
 {
-  unordered_map<int64_t, bool> visited{};
-  unordered_map<int64_t, bool> travelled{};
+  unordered_map<uint64_t, bool> visited{};
+  unordered_map<uint64_t, bool> travelled{};
   Point current(start);
   Point fakeWall(start + direction);
 
@@ -194,9 +194,9 @@ bool Map::checkForRecursion(Point start, Point direction)
 }
 
 
-inline int64_t Map::nodeId(Point node, Point* direction)
+inline uint64_t Map::nodeId(Point node, Point* direction)
 {
-  int64_t  res = 10 * (node.y * this->walls[0].size() + node.x);
+  uint64_t  res = 10 * (node.y * this->walls[0].size() + node.x);
   if (direction != nullptr) {
     if (*direction == LEFT)
     {

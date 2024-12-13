@@ -9,10 +9,10 @@
 namespace day11
 {
 
-int64_t task1(std::vector<std::string> lines);
-int64_t task2(std::vector<std::string> lines);
+uint64_t task1(std::vector<std::string> lines);
+uint64_t task2(std::vector<std::string> lines);
 
-inline int64_t executor(int task, std::vector<std::string> input)
+inline uint64_t executor(int task, std::vector<std::string> input)
 {
 
   if (task == 1) {

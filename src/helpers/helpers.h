@@ -17,6 +17,7 @@ std::vector<std::string> splitString(const std::string& str, char separator = '\
  */
 std::vector<int> parseIntsFromLine(const std::string& str);
 std::vector<u_int64_t> parseUInts64FromLine(const std::string& str);
+std::vector<uint64_t> parseInts64FromLine(const std::string& str);
 
 void printIntVector(std::vector<int> vec);
 

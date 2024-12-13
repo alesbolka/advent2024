@@ -59,9 +59,9 @@ Region::Region(Point start, const vector<string>& lines)
   }
 };
 
-int64_t Region::fencePrice()
+uint64_t Region::fencePrice()
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   for (auto plot : plots)
   {
     res += plot.second;
@@ -92,9 +92,9 @@ vector<Point> Region::runEdge(Point startPlot, Point edgeSide)
   return vector<Point>{edgeStart, edgeEnd};
 }
 
-int64_t Region::discountedPrice()
+uint64_t Region::discountedPrice()
 {
-  int64_t res = 0;
+  uint64_t res = 0;
   // first key is the direction the edge is in from a plot
   // the second key is the node we're checking from
   // value is boolean for whether this edge is accounted for

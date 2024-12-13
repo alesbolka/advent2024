@@ -36,14 +36,14 @@ parsedInput parseInput(vector<std::string> lines) {
   return res;
 }
 
-int64_t task1(vector<std::string> lines)
+uint64_t task1(vector<std::string> lines)
 {
   parsedInput data = parseInput(lines);
 
   std::sort(data.left.begin(), data.left.end(), comp_asc);
   std::sort(data.right.begin(), data.right.end(), comp_asc);
 
-  int64_t result = 0;
+  uint64_t result = 0;
 
   for (int ii = 0; ii < data.left.size(); ii++)
   {
@@ -54,9 +54,9 @@ int64_t task1(vector<std::string> lines)
   return result;
 }
 
-int64_t task2(vector<std::string> lines) {
+uint64_t task2(vector<std::string> lines) {
   parsedInput data = parseInput(lines);
-  int64_t res = 0;
+  uint64_t res = 0;
 
   for (int ii = 0; ii < data.left.size(); ii++) {
     int num = data.left[ii];

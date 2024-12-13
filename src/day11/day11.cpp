@@ -43,7 +43,7 @@ map<uint64_t, uint64_t> blink(map<uint64_t, uint64_t>* stones, int blinkNumber)
   return result;
 }
 
-int64_t task1(std::vector<std::string> lines)
+uint64_t task1(std::vector<std::string> lines)
 {
   map<uint64_t, uint64_t> stoneMap{};
   for (int stoneVal : helpers::parseUInts64FromLine(lines[0])) {
@@ -59,7 +59,7 @@ int64_t task1(std::vector<std::string> lines)
   return result;
 }
 
-int64_t task2(std::vector<std::string> lines)
+uint64_t task2(std::vector<std::string> lines)
 {
   map<uint64_t, uint64_t> stoneMap{};
   for (int stoneVal : helpers::parseUInts64FromLine(lines[0])) {

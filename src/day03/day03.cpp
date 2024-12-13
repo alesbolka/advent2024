@@ -10,9 +10,9 @@ using std::string;
 namespace day03
 {
 
-int64_t task1(std::string input)
+uint64_t task1(std::string input)
 {
-  int64_t result = 0;
+  uint64_t result = 0;
   std::regex matcher("mul\\((\\d+),(\\d+)\\)");
   auto it_start = std::sregex_iterator(input.begin(), input.end(), matcher);
   auto it_end = std::sregex_iterator();
@@ -31,9 +31,9 @@ int64_t task1(std::string input)
   return result;
 }
 
-int64_t task2(std::string input)
+uint64_t task2(std::string input)
 {
-  int64_t result = 0;
+  uint64_t result = 0;
   bool enabled = true;
   bool inMul = false;
 
