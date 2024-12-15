@@ -64,9 +64,45 @@ uint64_t Grid::simulateMovement(int steps)
 
 uint64_t Grid::stepsToTree()
 {
-  // nah, cba right now
+  vector<Point> positions{};
+  vector<string> output{};
 
-  return 0;
+  for (int ii = 0; ii < guards.size(); ii++)
+  {
+    positions.push_back(guards[ii].pos0);
+  }
+
+  uint64_t steps = 0;
+  uint64_t max = steps - 1;
+
+  // Stupid bruteforce go!
+  while (steps < max)
+  {
+    steps++;
+    output = vector<string>(sizeY, string(sizeX, '.'));
+
+    for (int ii = 0; ii < guards.size(); ii++)
+    {
+      positions[ii] += guards[ii].dir;
+      positions[ii].y = (positions[ii].y + sizeY) % sizeY;
+      positions[ii].x = (positions[ii].x + sizeX) % sizeX;
+      output[positions[ii].y][positions[ii].x] = '#';
+    }
+
+    for (auto line : output)
+    {
+      if (line.find("############") != string::npos)
+      {
+        for (auto line : output)
+        {
+          std::cout << line << std::endl;
+        }
+        return steps;
+      }
+    }
+  }
+
+  return -1;
 }
 
 }
