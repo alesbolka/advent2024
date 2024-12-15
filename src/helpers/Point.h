@@ -73,6 +73,12 @@ struct Point
     return y < other.y;
   }
 
+  inline Point operator *(const int fact) const
+  {
+    Point res{ y * fact, x * fact };
+    return res;
+  }
+
   Point rotate();
 };
 
