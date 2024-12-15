@@ -34,8 +34,18 @@ uint64_t Grid::simulateMovement(int steps)
     Point newPos(guard.pos0);
 
     newPos += guard.dir * steps;
-    newPos.y = (newPos.y + sizeY * steps) % sizeY;
-    newPos.x = (newPos.x + sizeX * steps) % sizeX;
+    newPos.y = newPos.y % sizeY;
+    newPos.x = newPos.x % sizeX;
+
+    if (newPos.y < 0)
+    {
+      newPos.y += sizeY;
+    }
+    if (newPos.x < 0)
+    {
+      newPos.x += sizeX;
+    }
+
     dist[newPos] += 1;
 
     if (newPos.y < midY)
